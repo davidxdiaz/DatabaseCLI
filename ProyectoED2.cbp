@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ProyectoED2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/ProyectoED2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/ProyectoED2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="bloque.cpp" />
+		<Unit filename="bloque.h" />
+		<Unit filename="bloquecampo.cpp" />
+		<Unit filename="bloquecampo.h" />
+		<Unit filename="bloqueregistro.cpp" />
+		<Unit filename="bloqueregistro.h" />
+		<Unit filename="bloquetabla.cpp" />
+		<Unit filename="bloquetabla.h" />
+		<Unit filename="campo.cpp" />
+		<Unit filename="campo.h" />
+		<Unit filename="campodatos.cpp" />
+		<Unit filename="campodatos.h" />
+		<Unit filename="datafile.cpp" />
+		<Unit filename="datafile.h" />
+		<Unit filename="json.hpp" />
+		<Unit filename="listbloquetablas.cpp" />
+		<Unit filename="listbloquetablas.h" />
+		<Unit filename="listcampodatos.cpp" />
+		<Unit filename="listcampodatos.h" />
+		<Unit filename="listcampos.cpp" />
+		<Unit filename="listcampos.h" />
+		<Unit filename="listregistros.cpp" />
+		<Unit filename="listregistros.h" />
+		<Unit filename="listtabla.cpp" />
+		<Unit filename="listtabla.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="manejadordebloques.cpp" />
+		<Unit filename="manejadordebloques.h" />
+		<Unit filename="manejadorjson.cpp" />
+		<Unit filename="manejadorjson.h" />
+		<Unit filename="manejadrotablas.cpp" />
+		<Unit filename="manejadrotablas.h" />
+		<Unit filename="masterblock.cpp" />
+		<Unit filename="masterblock.h" />
+		<Unit filename="registro.cpp" />
+		<Unit filename="registro.h" />
+		<Unit filename="tabla.cpp" />
+		<Unit filename="tabla.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

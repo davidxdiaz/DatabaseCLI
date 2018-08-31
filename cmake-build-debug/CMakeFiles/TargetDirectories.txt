@@ -1,0 +1,3 @@
+C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir
+C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/rebuild_cache.dir

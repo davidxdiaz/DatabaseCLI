@@ -1,0 +1,209 @@
+# depslib dependency file v1.0
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloque.cpp
+	"bloque.h"
+	"datafile.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloque.h
+	"datafile.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\datafile.h
+	<stdio.h>
+
+1503936878 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloquecampo.cpp
+	"bloquecampo.h"
+	"datafile.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+	"listcampos.h"
+	<iostream>
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloquecampo.h
+	"datafile.h"
+	"listcampos.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listcampos.h
+	"campo.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\campo.h
+
+1505081969 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloqueregistro.cpp
+	<cstring>
+	"bloqueregistro.h"
+	<iostream>
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloqueregistro.h
+	"datafile.h"
+	"listregistros.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listregistros.h
+	"registro.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\registro.h
+	"listcampodatos.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listcampodatos.h
+	"campodatos.h"
+
+1503928884 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\campodatos.h
+	"campo.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloquetabla.cpp
+	"bloquetabla.h"
+	"listtabla.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+	"tabla.h"
+	"datafile.h"
+	"datafile.h"
+	<iostream>
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\bloquetabla.h
+	"listtabla.h"
+	"datafile.h"
+	<vector>
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listtabla.h
+	"tabla.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\tabla.h
+	"listcampos.h"
+	"datafile.h"
+	"registro.h"
+	"listregistros.h"
+	"manejadordebloques.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\manejadordebloques.h
+	"datafile.h"
+	"bloque.h"
+	"masterblock.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\masterblock.h
+	"datafile.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\campo.cpp
+	"campo.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+
+1503928884 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\campodatos.cpp
+	"campodatos.h"
+	"campo.h"
+	<iostream>
+	<stdio.h>
+	<string.h>
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\datafile.cpp
+	"datafile.h"
+	<io.h>
+	<stdlib.h>
+	<cstring>
+	<stdio.h>
+	<iostream>
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listbloquetablas.cpp
+	"listbloquetablas.h"
+	"bloquetabla.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listbloquetablas.h
+	"bloquetabla.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listcampodatos.cpp
+	"listcampodatos.h"
+	"campodatos.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listcampos.cpp
+	"listcampos.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listregistros.cpp
+	"listregistros.h"
+	"registro.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\listtabla.cpp
+	"listtabla.h"
+	"tabla.h"
+	<iostream>
+
+1505086978 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\main.cpp
+	<iostream>
+	"datafile.h"
+	"bloque.h"
+	"manejadrotablas.h"
+	"manejadordebloques.h"
+	"bloquecampo.h"
+	"bloquetabla.h"
+	<stdio.h>
+	"masterblock.h"
+	"tabla.h"
+	"registro.h"
+	"campodatos.h"
+	"bloque.h"
+	"bloquecampo.h"
+	"bloqueregistro.h"
+	"campo.h"
+	"campodatos.h"
+
+1502164120 c:\users\david\downloads\proyectoed2-master\proyectoed2-master\manejadrotablas.h
+	"listbloquetablas.h"
+	"tabla.h"
+	"datafile.h"
+	"manejadordebloques.h"
+	"masterblock.h"
+	"bloquetabla.h"
+	"registro.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\manejadordebloques.cpp
+	"manejadordebloques.h"
+	"bloque.h"
+	"datafile.h"
+	<iostream>
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\manejadrotablas.cpp
+	"manejadrotablas.h"
+	"listbloquetablas.h"
+	"listtabla.h"
+	"bloquetabla.h"
+	"tabla.h"
+	"manejadordebloques.h"
+	"bloque.h"
+	<iostream>
+	"masterblock.h"
+	"registro.h"
+
+1502164120 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\masterblock.cpp
+	"masterblock.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+	"datafile.h"
+
+1503952062 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\registro.cpp
+	"registro.h"
+	"listcampodatos.h"
+	<stdio.h>
+	<string.h>
+	"campodatos.h"
+	<iostream>
+
+1503953424 source:c:\users\david\downloads\proyectoed2-master\proyectoed2-master\tabla.cpp
+	"tabla.h"
+	<stdio.h>
+	<string.h>
+	<iostream>
+	"listcampos.h"
+	"bloquecampo.h"
+	"datafile.h"
+	"bloqueregistro.h"
+	"registro.h"
+	"campodatos.h"
+	"listregistros.h"
+	"manejadordebloques.h"
+	"listbloquetablas.h"
+	"bloquecampo.h"
+	"registro.h"
+
