@@ -176,6 +176,33 @@ BloqueLlave.cpp.s:
 	$(MAKE) -f CMakeFiles\ProyectoED2_master.dir\build.make CMakeFiles/ProyectoED2_master.dir/BloqueLlave.cpp.s
 .PHONY : BloqueLlave.cpp.s
 
+Database.obj: Database.cpp.obj
+
+.PHONY : Database.obj
+
+# target to build an object file
+Database.cpp.obj:
+	$(MAKE) -f CMakeFiles\ProyectoED2_master.dir\build.make CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj
+.PHONY : Database.cpp.obj
+
+Database.i: Database.cpp.i
+
+.PHONY : Database.i
+
+# target to preprocess a source file
+Database.cpp.i:
+	$(MAKE) -f CMakeFiles\ProyectoED2_master.dir\build.make CMakeFiles/ProyectoED2_master.dir/Database.cpp.i
+.PHONY : Database.cpp.i
+
+Database.s: Database.cpp.s
+
+.PHONY : Database.s
+
+# target to generate assembly for a file
+Database.cpp.s:
+	$(MAKE) -f CMakeFiles\ProyectoED2_master.dir\build.make CMakeFiles/ProyectoED2_master.dir/Database.cpp.s
+.PHONY : Database.cpp.s
+
 HashTableEntry.obj: HashTableEntry.cpp.obj
 
 .PHONY : HashTableEntry.obj
@@ -785,6 +812,9 @@ help:
 	@echo ... BloqueLlave.obj
 	@echo ... BloqueLlave.i
 	@echo ... BloqueLlave.s
+	@echo ... Database.obj
+	@echo ... Database.i
+	@echo ... Database.s
 	@echo ... HashTableEntry.obj
 	@echo ... HashTableEntry.i
 	@echo ... HashTableEntry.s

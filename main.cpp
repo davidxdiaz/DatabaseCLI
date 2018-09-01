@@ -16,15 +16,18 @@
 #include "campo.h"
 #include "campodatos.h"
 #include "BloqueIndice.h"
+#include "Database.h"
 using namespace std;
 
 int main()
 {
     //Creo la base de Datos
-    DataFile * archivo = new DataFile("C:\\Users\\USUARIO\\Desktop\\BaseDatos.data");
+    Database * db = new Database("BaseDatos");
+
+    /*DataFile * archivo = new DataFile("C:\\Users\\USUARIO\\Desktop\\BaseDatos.data");
     archivo->abrir();
     ManejadordeBloques * mbloques= new ManejadordeBloques(archivo);
-    ManejadroTablas * mtablas=new ManejadroTablas(archivo,mbloques->masterBlock);
+    ManejadroTablas * mtablas=new ManejadroTablas(archivo,mbloques->masterBlock);*/
 
 
    /*for(int c=0;c<10;c++)
@@ -42,7 +45,7 @@ int main()
         {
             nombre[x+6]=cadena[x];
         }
-        mtablas->crearTabla(nombre,c,mbloques);
+        db->mTablas->crearTabla(nombre,c,db->mBloques);
         string id="ID";
         string name="Nombre";
         string edad="Edad";
@@ -52,9 +55,9 @@ int main()
         char * nom = const_cast<char *>(name.c_str());
         char * i = const_cast<char *>(id.c_str());
         char * e = const_cast<char *>(edad.c_str());
-        mtablas->crearCampo(c,i,0,mbloques);
-        mtablas->crearCampo(c,nom,0,mbloques);
-        mtablas->crearCampo(c,e,1,mbloques);
+        db->mTablas->crearCampo(c,i,0,db->mBloques);
+        db->mTablas->crearCampo(c,nom,0,db->mBloques);
+        db->mTablas->crearCampo(c,e,1,db->mBloques);
 
     }
     /*for(int c=0;c<1000;c++)
@@ -84,10 +87,13 @@ int main()
         mtablas->addRegistro(x,mbloques,r);
     }//*/
 
+    //Probando listar Tablas
+    //db->mTablas->listarTablas();
 
-   //Hay error en crear varias tablas o hay problema de escritura o problema de lectura
+
     //Probando la hashTable
-   mtablas->buscarTabla(7)->toString();
+   //db->mTablas->buscarTabla(0)->toString();
+
     /*BloqueIndice * b = new BloqueIndice(archivo,3);
     b->cargar();
     b->listarElementos();//*/
@@ -100,7 +106,7 @@ int main()
     /*mtablas->mj->cargar();
     mtablas->importar(mbloques,0);//*/
 
-
-    archivo->cerrar();
+    db->dropDatabase();
+    //db->cerrarConexion();
     return 0;
 }

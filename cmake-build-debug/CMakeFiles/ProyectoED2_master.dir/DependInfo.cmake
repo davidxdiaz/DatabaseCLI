@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/USUARIO/Documents/Github/DatabaseCLI/BloqueIndice.cpp" "C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir/BloqueIndice.cpp.obj"
   "C:/Users/USUARIO/Documents/Github/DatabaseCLI/BloqueLlave.cpp" "C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir/BloqueLlave.cpp.obj"
+  "C:/Users/USUARIO/Documents/Github/DatabaseCLI/Database.cpp" "C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj"
   "C:/Users/USUARIO/Documents/Github/DatabaseCLI/HashTableEntry.cpp" "C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir/HashTableEntry.cpp.obj"
   "C:/Users/USUARIO/Documents/Github/DatabaseCLI/Idx_Entry.cpp" "C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir/Idx_Entry.cpp.obj"
   "C:/Users/USUARIO/Documents/Github/DatabaseCLI/Indice.cpp" "C:/Users/USUARIO/Documents/Github/DatabaseCLI/cmake-build-debug/CMakeFiles/ProyectoED2_master.dir/Indice.cpp.obj"

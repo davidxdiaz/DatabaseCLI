@@ -92,6 +92,12 @@
 		<Unit filename="C:/Users/USUARIO/Documents/Github/DatabaseCLI/BloqueLlave.h">
 			<Option target="ProyectoED2_master"/>
 		</Unit>
+		<Unit filename="C:/Users/USUARIO/Documents/Github/DatabaseCLI/Database.cpp">
+			<Option target="ProyectoED2_master"/>
+		</Unit>
+		<Unit filename="C:/Users/USUARIO/Documents/Github/DatabaseCLI/Database.h">
+			<Option target="ProyectoED2_master"/>
+		</Unit>
 		<Unit filename="C:/Users/USUARIO/Documents/Github/DatabaseCLI/HashTableEntry.cpp">
 			<Option target="ProyectoED2_master"/>
 		</Unit>

@@ -11,6 +11,30 @@ CMakeFiles/ProyectoED2_master.dir/BloqueLlave.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/BloqueLlave.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/Idx_Entry.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/datafile.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/BloqueIndice.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/Database.cpp
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/Database.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/HashTableEntry.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/Idx_Entry.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/Indice.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/bloque.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/bloquetabla.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/campo.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/campodatos.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/datafile.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/json.hpp
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listbloquetablas.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampodatos.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampos.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listregistros.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listtabla.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/manejadordebloques.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/manejadorjson.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/manejadrotablas.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/masterblock.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/registro.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/tabla.h
 CMakeFiles/ProyectoED2_master.dir/HashTableEntry.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/HashTableEntry.cpp
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/HashTableEntry.h
@@ -132,6 +156,7 @@ CMakeFiles/ProyectoED2_master.dir/listtabla.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/tabla.h
 CMakeFiles/ProyectoED2_master.dir/main.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/BloqueIndice.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/Database.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/HashTableEntry.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/Idx_Entry.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/Indice.h

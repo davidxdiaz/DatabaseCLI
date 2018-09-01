@@ -51,6 +51,6 @@ set(SOURCE_FILES
         registro.cpp
         registro.h
         tabla.cpp
-        tabla.h)
+        tabla.h Database.cpp Database.h)
 
 add_executable(ProyectoED2_master ${SOURCE_FILES})

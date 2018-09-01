@@ -23,6 +23,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/ProyectoED2_master.dir/masterblock.cpp.obj"
   "CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj"
   "CMakeFiles/ProyectoED2_master.dir/tabla.cpp.obj"
+  "CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj"
   "ProyectoED2_master.pdb"
   "ProyectoED2_master.exe"
   "ProyectoED2_master.exe.manifest"

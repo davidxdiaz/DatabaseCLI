@@ -11,6 +11,30 @@ CMakeFiles/ProyectoED2_master.dir/BloqueLlave.cpp.obj: ../BloqueLlave.h
 CMakeFiles/ProyectoED2_master.dir/BloqueLlave.cpp.obj: ../Idx_Entry.h
 CMakeFiles/ProyectoED2_master.dir/BloqueLlave.cpp.obj: ../datafile.h
 
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../BloqueIndice.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../Database.cpp
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../Database.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../HashTableEntry.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../Idx_Entry.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../Indice.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../bloque.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../bloquetabla.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../campo.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../campodatos.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../datafile.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../json.hpp
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../listbloquetablas.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../listcampodatos.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../listcampos.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../listregistros.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../listtabla.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../manejadordebloques.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../manejadorjson.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../manejadrotablas.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../masterblock.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../registro.h
+CMakeFiles/ProyectoED2_master.dir/Database.cpp.obj: ../tabla.h
+
 CMakeFiles/ProyectoED2_master.dir/HashTableEntry.cpp.obj: ../HashTableEntry.cpp
 CMakeFiles/ProyectoED2_master.dir/HashTableEntry.cpp.obj: ../HashTableEntry.h
 
@@ -131,6 +155,7 @@ CMakeFiles/ProyectoED2_master.dir/listtabla.cpp.obj: ../registro.h
 CMakeFiles/ProyectoED2_master.dir/listtabla.cpp.obj: ../tabla.h
 
 CMakeFiles/ProyectoED2_master.dir/main.cpp.obj: ../BloqueIndice.h
+CMakeFiles/ProyectoED2_master.dir/main.cpp.obj: ../Database.h
 CMakeFiles/ProyectoED2_master.dir/main.cpp.obj: ../HashTableEntry.h
 CMakeFiles/ProyectoED2_master.dir/main.cpp.obj: ../Idx_Entry.h
 CMakeFiles/ProyectoED2_master.dir/main.cpp.obj: ../Indice.h
