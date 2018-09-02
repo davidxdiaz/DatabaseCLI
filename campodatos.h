@@ -10,6 +10,7 @@ class CampoDatos
         campo * defCampos;
         CampoDatos * sig;
         int getIntValue();
+        double getDoubleValue();
         char * getCharValue();
         void printValor();
         void toString();

@@ -12,7 +12,7 @@
 using namespace std;
 class Database {
     public:
-        Database(string name);
+        Database(string name,int tamBloque);
         DataFile * archivo;
         char* dataName;
         char * path;
@@ -20,7 +20,9 @@ class Database {
         ManejadroTablas * mTablas;
         bool dropDatabase();
         void cerrarConexion();
-        void iniciarConexion();
+        void iniciarConexion(int t);
+        void createDataBase(int tamano,string tipo);
+        int getTamanoDatabase();
         //Debe de tener funciones de proyeccion
 };
 

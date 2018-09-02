@@ -69,6 +69,7 @@ CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/campodatos.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/datafile.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampodatos.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampos.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/listregistros.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/registro.h
 CMakeFiles/ProyectoED2_master.dir/bloquetabla.cpp.obj
@@ -133,6 +134,7 @@ CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/campo.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/campodatos.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampodatos.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampos.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/listregistros.cpp
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/listregistros.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/registro.h
@@ -221,6 +223,7 @@ CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/campo.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/campodatos.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampodatos.h
+ C:/Users/USUARIO/Documents/Github/DatabaseCLI/listcampos.h
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/registro.cpp
  C:/Users/USUARIO/Documents/Github/DatabaseCLI/registro.h
 CMakeFiles/ProyectoED2_master.dir/tabla.cpp.obj

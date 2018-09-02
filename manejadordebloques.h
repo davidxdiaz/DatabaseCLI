@@ -7,11 +7,12 @@
 class ManejadordeBloques
 {
     public:
-        ManejadordeBloques(DataFile *a);
-        void formatearDataFile();
+        ManejadordeBloques(DataFile *a,int t);
+        void formatearDataFile(int t);
         DataFile * archivo;
         Bloque * asignarNueboBloque();
         void actualizarMasterBlock();
+        void createDataBase(int tam,int n);
         MasterBlock * masterBlock;
         Bloque * cargarBloque(int numeroBloque);
 };

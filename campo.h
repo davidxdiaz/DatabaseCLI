@@ -5,7 +5,7 @@
 class campo
 {
     public:
-        campo(char name[20],int t);
+        campo(char name[20],int t,int lon);
         char nombre[20];
         int tipo;
         int longitud;

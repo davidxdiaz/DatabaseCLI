@@ -17,7 +17,7 @@
 #include "BloqueIndice.h"
 using namespace std;
 
-tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile *a,int primerBIndice,int actualBIndice)
+tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile *a,int primerBIndice,int actualBIndice,int tChar)
 {
     archivo=a;
     strncpy(nombre,name,20);
@@ -29,6 +29,7 @@ tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int 
     primerBloqueIndice=primerBIndice;
     actualBloqueIndice=actualBIndice;
     nBloque=nB;
+    tamChar=tChar;
     sig=0;
     campos= new ListCampos();
     registros= new ListRegistros();
@@ -38,7 +39,7 @@ tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int 
 
 char * tabla::toChar()
 {
-    char * data= new char[52];
+    char * data= new char[56];
     int pos=0;
     memcpy(&data[pos],nombre,20);
     pos+=20;
@@ -57,6 +58,8 @@ char * tabla::toChar()
     memcpy(&data[pos],&actualBloqueIndice,4);
     pos+=4;
     memcpy(&data[pos],&nBloque,4);
+    pos+=4;
+    memcpy(&data[pos],&tamChar,4);
     pos+=4;
     return data;
 }
@@ -81,6 +84,8 @@ void tabla::charToTabla(char * data)
     memcpy(&actualBloqueIndice,&data[pos],4);
     pos+=4;
     memcpy(&nBloque,&data[pos],4);
+    pos+=4;
+    memcpy(&tamChar,&data[pos],4);
     pos+=4;
     indice=new Indice(archivo,primerBloqueIndice,actualBloqueIndice,getTamanoHashTable());
 }
@@ -151,7 +156,18 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
 
 void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
 {
-    campo * c= new campo(name,tipo);
+    // Obtengo la longitud dependiendo del tipo de datos, si es 0 es int,si es 1 es double y si es 2 es char;
+    int lon;
+    if(tipo==0)
+        lon=4;
+    else if(tipo==1)
+        lon=8;
+    else if(tipo==2)
+        lon=tamChar;
+    else
+        cout<<"Error el tipo de datos que desea ingresar es incorrecto ---- Recuerde que solo puede ingresar 0(int),1(double,2(char)"<<endl;
+
+    campo * c= new campo(name,tipo,lon);
     if(primerBloqueCampos==-1)
     {
         Bloque * b =mbloques->asignarNueboBloque();
@@ -233,7 +249,7 @@ void tabla::cargarRegistros()
 Registro * tabla::interpretarRegistro(char * data,int longitud)
 {
     int pos=0;
-    Registro * reg= new Registro(longitud);
+    Registro * reg= new Registro(longitud,0);// debo de cambiar el valor del id en registro donde esta 0
     for(int c=0;c<campos->cantidad;c++)
     {
         CampoDatos * campDatos= new CampoDatos("",0);
@@ -261,7 +277,7 @@ int tabla::getLongitudRegistros()
 
 void tabla::toString()
 {
-    cout<<"Nombre: "<<nombre<<"  ID: "<<id<<"  PrimerBloqueCampo: "<<primerBloqueCampos<<"  ActualBloqueCampo: "<<actualBloqueCampos<<"  PrimerBloqueDatos: "<<primerBloqueDatos<<"  ActualBloqueDatos: "<<actualBloqueDatos<<"  Numero de Bloque: "<<nBloque<<" pbloqueindice "<<primerBloqueIndice<<" actualbloqueindice"<<actualBloqueIndice<<endl<<endl;
+    cout<<"Nombre: "<<nombre<<"  ID: "<<id<<"  PrimerBloqueCampo: "<<primerBloqueCampos<<"  ActualBloqueCampo: "<<actualBloqueCampos<<"  PrimerBloqueDatos: "<<primerBloqueDatos<<"  ActualBloqueDatos: "<<actualBloqueDatos<<"  Numero de Bloque: "<<nBloque<<" pbloqueindice "<<primerBloqueIndice<<" actualbloqueindice"<<actualBloqueIndice<<" Tamano Char "<<tamChar<<endl<<endl;
 }
 
 void tabla::printTabla()

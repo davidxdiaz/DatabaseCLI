@@ -15,6 +15,13 @@ int CampoDatos::getIntValue()
 {
     return (int)(valor-48);
 }
+
+double CampoDatos::getDoubleValue() {
+    double val;
+    memcpy(&val,&valor[0],8);
+    return val;
+}
+
 char * CampoDatos::getCharValue()
 {
     return valor;
@@ -22,10 +29,13 @@ char * CampoDatos::getCharValue()
 
 void CampoDatos::printValor()
 {
-    if(defCampos->tipo==0)
-        cout<<getCharValue();
-    else
+    int tipo = defCampos->tipo;
+    if(tipo==0)
         cout<<getIntValue();
+    else if(tipo==1)
+        cout<<getDoubleValue();
+    else
+        cout<<getCharValue();
 }
 
 void CampoDatos::toString()

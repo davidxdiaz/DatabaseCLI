@@ -10,7 +10,7 @@
 class tabla
 {
     public:
-        tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile * a,int primerBIndice,int actualBIndice);
+        tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile * a,int primerBIndice,int actualBIndice,int tChar);
         DataFile * archivo;
         char nombre[20];
         int id;
@@ -21,6 +21,7 @@ class tabla
         int primerBloqueIndice;
         int actualBloqueIndice;
         int nBloque;
+        int tamChar;
         ListCampos * campos;
         ListRegistros * registros;
         char * toChar();

@@ -19,6 +19,7 @@ class BloqueRegistro
         char * toChar();
         void charToBloque(char * data,int longitud);
         ListRegistros * registros;
+
         Registro * getRegsitro(int pos,int longitud);
 };
 

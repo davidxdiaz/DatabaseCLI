@@ -44,7 +44,7 @@ void BloqueCampo::charToBloque(char * data)
     pos+=4;
     for(int x=0;x<cantidad;x++)
     {
-        campo *c= new campo("",0);
+        campo *c= new campo("",0,0);
         c->initFromChar(&data[pos]);
         campos->add(c);
         pos+=28;

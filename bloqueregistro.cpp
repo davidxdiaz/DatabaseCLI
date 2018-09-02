@@ -63,7 +63,7 @@ void BloqueRegistro::charToBloque(char *data, int longitud)
     pos+=4;
     for(int c=0;c<cantidad;c++)
     {
-        Registro * r= new Registro(longitud);
+        Registro * r= new Registro(longitud,0);
         r->initFromChar(&data[pos]);
         registros->add(r);
         pos+=longitud;

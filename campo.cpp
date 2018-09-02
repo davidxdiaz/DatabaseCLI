@@ -4,11 +4,16 @@
 #include <iostream>
 using namespace std;
 
-campo::campo(char name[20],int t)
+campo::campo(char name[20],int t,int lon)
 {
     strncpy(nombre,name,20);
     tipo=t;
-    longitud=20;
+    /*
+     * tipo==0 int
+     * tipo==1 double
+     * tipo==2 char[longitud]
+     */
+    longitud=lon;
     sig=0;
 
 }

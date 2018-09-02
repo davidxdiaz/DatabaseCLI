@@ -4,14 +4,15 @@
 #include <iostream>
 #include "datafile.h"
 
-MasterBlock::MasterBlock(DataFile *a,int sigBD,int primerBT,int actualBT)
+MasterBlock::MasterBlock(DataFile *a,int sigBD,int primerBT,int actualBT,int tamBloque)
 {
     sigBloqueDisponible=sigBD;
-    tamanoBloque=512;
+    tamanoBloque=tamBloque;
     primerBloqueTabla=primerBT;
     actualBloqueTabla=actualBT;
     sizeMasterB=20;
     archivo=a;
+    ultimoBloque=1;
 }
 
 MasterBlock::MasterBlock(DataFile *a)

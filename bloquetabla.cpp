@@ -49,8 +49,8 @@ char * BloqueTabla::toChar()
     {
 
         char * entry_data= tablas->get(c)->toChar();
-        memcpy(&data[pos],entry_data,52);
-        pos+=52;
+        memcpy(&data[pos],entry_data,56);
+        pos+=56;
     }
     return data;
 }
@@ -68,10 +68,10 @@ void BloqueTabla::initFromChar(char * data)
     pos+=4;
     for(int c=0;c<cantidad;c++)
     {
-        tabla *t= new tabla("",0,0,0,0,0,0,archivo,0,0);
+        tabla *t= new tabla("",0,0,0,0,0,0,archivo,0,0,0);
         t->charToTabla(&data[pos]);
         tablas->addTabla(t);
-        pos+=52;
+        pos+=56;
     }
 }
 

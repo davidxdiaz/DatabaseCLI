@@ -68,6 +68,7 @@ CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../campo.h
 CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../campodatos.h
 CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../datafile.h
 CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../listcampodatos.h
+CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../listcampos.h
 CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../listregistros.h
 CMakeFiles/ProyectoED2_master.dir/bloqueregistro.cpp.obj: ../registro.h
 
@@ -132,6 +133,7 @@ CMakeFiles/ProyectoED2_master.dir/listcampos.cpp.obj: ../listcampos.h
 CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../campo.h
 CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../campodatos.h
 CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../listcampodatos.h
+CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../listcampos.h
 CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../listregistros.cpp
 CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../listregistros.h
 CMakeFiles/ProyectoED2_master.dir/listregistros.cpp.obj: ../registro.h
@@ -220,6 +222,7 @@ CMakeFiles/ProyectoED2_master.dir/masterblock.cpp.obj: ../masterblock.h
 CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj: ../campo.h
 CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj: ../campodatos.h
 CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj: ../listcampodatos.h
+CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj: ../listcampos.h
 CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj: ../registro.cpp
 CMakeFiles/ProyectoED2_master.dir/registro.cpp.obj: ../registro.h
 

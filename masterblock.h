@@ -5,13 +5,14 @@
 class MasterBlock
 {
     public:
-        MasterBlock(DataFile *archivo,int sigBD,int primerBT,int actualBT);
+        MasterBlock(DataFile *archivo,int sigBD,int primerBT,int actualBT,int tamBloque);
         MasterBlock(DataFile *a);
         int sigBloqueDisponible;
         int tamanoBloque;
         int primerBloqueTabla;
         int actualBloqueTabla;
         int sizeMasterB;
+        int ultimoBloque;
         char * toChar();
         void charToBloque(char * data);
         void guardar();

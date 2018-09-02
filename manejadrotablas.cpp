@@ -37,7 +37,7 @@ ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock)
 
 void ManejadroTablas::crearTabla(char name[20],int id,ManejadordeBloques * manejador)
 {
-    tabla * t = new tabla(name,id,-1,-1,-1,-1,0,archivo,-1,-1);
+    tabla * t = new tabla(name,id,-1,-1,-1,-1,0,archivo,-1,-1,0);//Debe asignarse correctamente el Tamano del char
     if(manejador->masterBlock->primerBloqueTabla==-1)
     {
         BloqueTabla * bt= new BloqueTabla(archivo,0);
@@ -217,14 +217,14 @@ void ManejadroTablas::importar(ManejadordeBloques *mb, int sig)
             strncpy(nameCampo,ntemp.c_str(),20);
             int tipo=  mj->j[bt.str()][ta.str()][tp.str()].get<int>();
 
-            campo * camp= new campo(nameCampo,tipo);
+            campo * camp= new campo(nameCampo,tipo,0);//Debo modificar correctamente la longitud donde esta 0, cambiarlo por una funcion que devuelva la longitud segun el tipo de dato
             crearCampo(id,nameCampo,tipo,mb);
 
 
         }
         for(int i=0;i<nRegistros;i++)
         {
-            Registro * registro = new Registro(buscarTabla(id)->getLongitudRegistros());
+            Registro * registro = new Registro(buscarTabla(id)->getLongitudRegistros(),0);// Debeo de cambiar el tam de char
 
             for(int x=0;x< cantCampos;x++)
             {
