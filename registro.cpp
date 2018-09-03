@@ -16,7 +16,7 @@ Registro::Registro(int longitud,int id)
 char * Registro::toChar()
 {
     int pos=0;
-    char * data= new char[longitudRegistro+4]; //Escribire un id registro interno para asi manejar la hashtable
+    char * data= new char[longitudRegistro]; //Escribire un id registro interno para asi manejar la hashtable
     //cout<<longitudRegistro<<endl;
     memcpy(&data[pos],&idRegistro,4);
     pos+=4;

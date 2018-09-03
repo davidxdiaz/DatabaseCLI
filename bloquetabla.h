@@ -7,7 +7,7 @@
 class BloqueTabla
 {
     public:
-        BloqueTabla(DataFile * archivo,int nB);
+        BloqueTabla(DataFile * archivo,int nB,int t);
         BloqueTabla(int nB);
         int nBloque;
         int siguiente;

@@ -24,7 +24,8 @@ int main()
     //Creo la base de Datos
     Database * db = new Database("BaseDatos",8192);
     //Pruebo el crear la base de datos
-    //db->createDataBase(1,"GB");
+    //db->createDataBase(1,"MB");
+    db->mBloques->masterBlock->print();
 
 
     //Proyecto anterior
@@ -110,8 +111,8 @@ int main()
     /*mtablas->mj->cargar();
     mtablas->importar(mbloques,0);//*/
 
-    db->dropDatabase();
-    //db->cerrarConexion();
+    //db->dropDatabase();
+    db->cerrarConexion();
 
     return 0;
 }

@@ -9,11 +9,11 @@
 #include <iostream>
 using namespace std;
 
-BloqueTabla::BloqueTabla(DataFile * a,int nB)
+BloqueTabla::BloqueTabla(DataFile * a,int nB,int t)
 {
     nBloque=nB;
     siguiente=-1;
-    tamano=512;
+    tamano=t;
     cantidad=0;
     tablas=new ListTabla();
 
@@ -78,7 +78,7 @@ void BloqueTabla::initFromChar(char * data)
 void BloqueTabla::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamano+20;
+    int pos= nBloque * tamano+24;
     archivo->escribir(data,pos,tamano);
 }
 

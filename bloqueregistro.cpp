@@ -3,19 +3,19 @@
 #include <iostream>
 using namespace std;
 
-BloqueRegistro::BloqueRegistro(DataFile * archivo,int nBloque)
+BloqueRegistro::BloqueRegistro(DataFile * archivo,int nBloque,char * r,int t)
 {
     this->archivo=archivo;
     this->nBloque=nBloque;
-    tamBloque=512;
+    tamBloque=t;
     siguiente=-1;
-    this->cantidad=0;
     registros= new ListRegistros();
+    registro= r;
 }
-void BloqueRegistro::escribir()
+void BloqueRegistro::escribir(char * registro,int longitud)
 {
-    char * data= this->toChar();
-    int pos= nBloque * tamBloque+20;
+    char * data= this->toChar(registro,longitud);
+    int pos= nBloque * tamBloque+24;
     archivo->escribir(data,pos,tamBloque);
 }
 void BloqueRegistro::cargar(int longitud)
@@ -26,9 +26,9 @@ void BloqueRegistro::cargar(int longitud)
 }
 void BloqueRegistro::actualizarCantidad()
 {
-    this->cantidad++;
+    //this->cantidad++;
 }
-char *BloqueRegistro::toChar()
+char *BloqueRegistro::toChar(char * registro,int longitud)
 {
     char * data= new char[tamBloque];
     int pos=0;
@@ -38,16 +38,8 @@ char *BloqueRegistro::toChar()
     pos+=4;
     memcpy(&data[pos],&siguiente,4);
     pos+=4;
-    memcpy(&data[pos],&cantidad,4);
-    pos+=4;
-    for(int c=0;c<cantidad;c++)
-    {
-        Registro * r=registros->get(c);
-        int x=r->longitudRegistro;
-        char * entry_data= r->toChar();
-        memcpy(&data[pos],entry_data,x);
-        pos+=x;
-    }
+    memcpy(&data[pos],registro,longitud);
+    pos+=longitud;
     return data;
 }
 void BloqueRegistro::charToBloque(char *data, int longitud)
@@ -59,15 +51,8 @@ void BloqueRegistro::charToBloque(char *data, int longitud)
     pos+=4;
     memcpy(&siguiente,&data[pos],4);
     pos+=4;
-    memcpy(&cantidad,&data[pos],4);
-    pos+=4;
-    for(int c=0;c<cantidad;c++)
-    {
-        Registro * r= new Registro(longitud,0);
-        r->initFromChar(&data[pos]);
-        registros->add(r);
-        pos+=longitud;
-    }
+    memcpy(registro,&data[pos],longitud);
+    pos+=longitud;
 }
 
 Registro * BloqueRegistro::getRegsitro(int pos,int longitud) {

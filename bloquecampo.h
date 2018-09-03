@@ -6,7 +6,7 @@
 class BloqueCampo
 {
     public:
-        BloqueCampo(DataFile * a,int numBloque);
+        BloqueCampo(DataFile * a,int numBloque,int t);
         int nBloque;
         int tamBloque;
         void escribir();

@@ -22,6 +22,8 @@ class tabla
         int actualBloqueIndice;
         int nBloque;
         int tamChar;
+        int contRegistros;
+        int eliminado;
         ListCampos * campos;
         ListRegistros * registros;
         char * toChar();

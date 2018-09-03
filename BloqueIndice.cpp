@@ -81,7 +81,7 @@ void BloqueIndice::listarElementos() {
 void BloqueIndice::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamano+20;
+    int pos= nBloque * tamano+24;
     archivo->escribir(data,pos,tamano);
 }
 

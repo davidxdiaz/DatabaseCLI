@@ -6,17 +6,17 @@
 class BloqueRegistro
 {
     public:
-        BloqueRegistro(DataFile * archivo,int nBloque);
+        BloqueRegistro(DataFile * archivo,int nBloque,char * r,int t);
         int nBloque;
         DataFile * archivo;
-        int cantidad;
         int tamBloque;
         int siguiente;
         int longitudRegistro;
-        void escribir();
+        char * registro;
+        void escribir(char * registro,int longitud);
         void cargar(int longitud);
         void actualizarCantidad();
-        char * toChar();
+        char * toChar(char * registro,int longitud);
         void charToBloque(char * data,int longitud);
         ListRegistros * registros;
 

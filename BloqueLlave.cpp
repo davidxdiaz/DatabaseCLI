@@ -5,11 +5,11 @@
 #include "BloqueLlave.h"
 #include "string.h"
 
-BloqueLlave::BloqueLlave(DataFile * a,int nB)
+BloqueLlave::BloqueLlave(DataFile * a,int nB,int t)
 {
     nBloque=nB;
     siguiente=-1;
-    tamano=512;
+    tamano=t;
     cantidad=0;
     archivo=a;
 }
@@ -70,7 +70,7 @@ void BloqueLlave::initFromChar(char * data)
 void BloqueLlave::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamano+20;
+    int pos= nBloque * tamano+24;
     archivo->escribir(data,pos,tamano);
 }
 

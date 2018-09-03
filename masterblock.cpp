@@ -4,13 +4,14 @@
 #include <iostream>
 #include "datafile.h"
 
+using namespace std;
 MasterBlock::MasterBlock(DataFile *a,int sigBD,int primerBT,int actualBT,int tamBloque)
 {
     sigBloqueDisponible=sigBD;
     tamanoBloque=tamBloque;
     primerBloqueTabla=primerBT;
     actualBloqueTabla=actualBT;
-    sizeMasterB=20;
+    sizeMasterB=24;
     archivo=a;
     ultimoBloque=1;
 }
@@ -18,7 +19,7 @@ MasterBlock::MasterBlock(DataFile *a,int sigBD,int primerBT,int actualBT,int tam
 MasterBlock::MasterBlock(DataFile *a)
 {
     archivo=a;
-    sizeMasterB=20;
+    sizeMasterB=24;
 }
 
 char * MasterBlock::toChar()
@@ -34,6 +35,8 @@ char * MasterBlock::toChar()
     memcpy(&data[pos],&actualBloqueTabla,4);
     pos+=4;
     memcpy(&data[pos],&sizeMasterB,4);
+    pos+=4;
+    memcpy(&data[pos],&ultimoBloque,4);
     pos+=4;
     return data;
 }
@@ -51,6 +54,8 @@ void MasterBlock::charToBloque(char * data)
     pos+=4;
     memcpy(&sizeMasterB,&data[pos],4);
     pos+=4;
+    memcpy(&ultimoBloque,&data[pos],4);
+    pos+=4;
 }
 
 void MasterBlock::guardar()
@@ -63,4 +68,8 @@ void MasterBlock::cargar()
 {
     char * data=archivo->leer(0,sizeMasterB);
     charToBloque(data);
+}
+
+void MasterBlock::print() {
+    cout<<" Imprimiendo MasterBlock "<<endl<<"Siguiente Bloque Disponible "<<sigBloqueDisponible<<" size de los bloques "<<tamanoBloque<<" primer bloque tabla "<<primerBloqueTabla<<" actual bloque tablas "<<actualBloqueTabla<<" size de MB "<<sizeMasterB<<" ultimo bloque "<<ultimoBloque<<endl;
 }

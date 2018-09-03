@@ -7,10 +7,10 @@
 #include <iostream>
 using namespace std;
 
-BloqueCampo::BloqueCampo(DataFile * file,int numBloque)
+BloqueCampo::BloqueCampo(DataFile * file,int numBloque,int t)
 {
     nBloque=numBloque;
-    tamBloque=512;
+    tamBloque=t;
     siguiente=-1;
     archivo=file;
     cantidad=0;
@@ -20,7 +20,7 @@ BloqueCampo::BloqueCampo(DataFile * file,int numBloque)
 void BloqueCampo::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamBloque+20;
+    int pos= nBloque * tamBloque+24;
     archivo->escribir(data,pos,tamBloque);
 }
 

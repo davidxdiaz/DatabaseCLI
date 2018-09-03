@@ -23,7 +23,7 @@ Bloque::Bloque(int num,int tam)
 void Bloque::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamBloque+20;
+    int pos= nBloque * tamBloque+24;
     archivo->escribir(data,pos,tamBloque);
 }
 

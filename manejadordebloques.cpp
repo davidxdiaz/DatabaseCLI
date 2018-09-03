@@ -42,6 +42,7 @@ void ManejadordeBloques::createDataBase(int tam,int n) {
     bloque->escribir();
     delete bloque;
     int sig=0;
+    cout<<"Creado data: "<<next<<" de " <<tam/masterBlock->tamanoBloque<<endl;
     //Creo el resto de bloques hasta llenar la base de datos
     for(int c=masterBlock->tamanoBloque;c<tam;c+=masterBlock->tamanoBloque){
         sig=next+1;
@@ -49,10 +50,11 @@ void ManejadordeBloques::createDataBase(int tam,int n) {
             sig=-2;//para indicar que es el ultimo bloque y cuaando el Masterblock->sigBloqueDisponible ==-2 retornar que la base de datos ya esta llena;
         Bloque * b= new Bloque(archivo,next,masterBlock->tamanoBloque,sig);
         masterBlock->ultimoBloque=next;//Esto por si uso esta funcion varias veces en la clase DataBase ( mas que nada por la cantidad de memoria consumida prefiero hacerlo por partes)
+        masterBlock->guardar();
         b->escribir();
         delete b;
         next++;
-        cout<<"Creado el bloque con el numero: "<<next-1<<endl;
+        cout<<"Creado data: "<<next<<" de " <<tam/masterBlock->tamanoBloque<<endl;
     }
 }
 

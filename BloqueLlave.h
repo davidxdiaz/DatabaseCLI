@@ -10,7 +10,7 @@
 
 class BloqueLlave {
 public:
-    BloqueLlave(DataFile *a,int nB);
+    BloqueLlave(DataFile *a,int nB,int t);
 
     int nBloque;
     int siguiente;

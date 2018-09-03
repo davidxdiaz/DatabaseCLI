@@ -17,6 +17,7 @@ class MasterBlock
         void charToBloque(char * data);
         void guardar();
         void cargar();
+        void print();
         DataFile * archivo;
 };
 
