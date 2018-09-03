@@ -15,7 +15,7 @@ public:
     int primerBIndice;
     int actualBIndice;
     bool insertar(Idx_Entry *e,ManejadordeBloques * mb);
-    Idx_Entry * buscar(char * id);
+    Idx_Entry * buscar(char * id,ManejadordeBloques * mB);
     void reHash(ManejadordeBloques * mB);
     BloqueIndice * clonar();
     void manejadorBIndice(ManejadordeBloques * mB);

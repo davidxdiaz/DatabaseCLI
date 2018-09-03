@@ -11,7 +11,7 @@
 using namespace std;
 
 
-ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock)
+ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock,ManejadordeBloques * mbl)
 {
     archivo=a;
     mj= new ManejadorJson();
@@ -26,8 +26,8 @@ ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock)
             for(int c=0;c<bt->cantidad;c++)
             {
                 tabla * t=bt->tablas->get(c);
-                t->cargarCampos();
-                t->cargarRegistros();
+                t->cargarCampos(masterBlock->tamanoBloque);
+                t->cargarRegistros(mbl);
             }
         }
 
@@ -37,10 +37,10 @@ ManejadroTablas::ManejadroTablas(DataFile *a,MasterBlock * masterBlock)
 
 void ManejadroTablas::crearTabla(char name[20],int id,ManejadordeBloques * manejador)
 {
-    tabla * t = new tabla(name,id,-1,-1,-1,-1,0,archivo,-1,-1,0);//Debe asignarse correctamente el Tamano del char
+    tabla * t = new tabla(name,id,-1,-1,-1,-1,0,archivo,-1,-1,manejador->masterBlock->tamChar,manejador->masterBlock->tamanoBloque);//Debe asignarse correctamente el Tamano del char
     if(manejador->masterBlock->primerBloqueTabla==-1)
     {
-        BloqueTabla * bt= new BloqueTabla(archivo,0);
+        BloqueTabla * bt= new BloqueTabla(archivo,0,manejador->masterBlock->tamanoBloque);
         bt->tablas->addTabla(t);
         bt->actualizarCantidad();
         bt->escribir();
@@ -71,7 +71,7 @@ void ManejadroTablas::crearTabla(char name[20],int id,ManejadordeBloques * manej
     BloqueTabla * bt=listaBT->get(op);
     bt->siguiente=b->nBloque;
     bt->escribir();
-    BloqueTabla * tmp= new BloqueTabla(b->archivo,b->nBloque);
+    BloqueTabla * tmp= new BloqueTabla(b->archivo,b->nBloque,manejador->masterBlock->tamanoBloque);
     t->nBloque=tmp->nBloque;
     tmp->tablas->addTabla(t);
     tmp->actualizarCantidad();
@@ -127,13 +127,13 @@ BloqueTabla * ManejadroTablas::buscarBloqueTabla(int n)
 void ManejadroTablas::cargarBT()
 {
     int actual=mb->primerBloqueTabla;
-    BloqueTabla * bloque= new BloqueTabla(archivo,actual);
+    BloqueTabla * bloque= new BloqueTabla(archivo,actual,mb->tamanoBloque);
     bloque->cargar();
     listaBT->addBT(bloque);
     while(bloque->siguiente !=-1)
     {
         actual=bloque->siguiente;
-        bloque= new BloqueTabla(archivo,actual);
+        bloque= new BloqueTabla(archivo,actual,mb->tamanoBloque);
         bloque->cargar();
         listaBT->addBT(bloque);
     }
@@ -160,6 +160,7 @@ void ManejadroTablas::addRegistro(int id,ManejadordeBloques * manejador,Registro
     if(t!=0)
     {
         t->crearRegistro(manejador,r);
+        t->contRegistros++;
         BloqueTabla * bt = buscarBloqueTabla(t->nBloque);
         bt->escribir();
     }
@@ -224,7 +225,7 @@ void ManejadroTablas::importar(ManejadordeBloques *mb, int sig)
         }
         for(int i=0;i<nRegistros;i++)
         {
-            Registro * registro = new Registro(buscarTabla(id)->getLongitudRegistros(),0);// Debeo de cambiar el tam de char
+            Registro * registro = new Registro(buscarTabla(id)->getLongitudRegistros());// Debeo de cambiar el tam de char
 
             for(int x=0;x< cantCampos;x++)
             {

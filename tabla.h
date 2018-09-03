@@ -10,7 +10,7 @@
 class tabla
 {
     public:
-        tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile * a,int primerBIndice,int actualBIndice,int tChar);
+        tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile * a,int primerBIndice,int actualBIndice,int tChar,int tamBloque);
         DataFile * archivo;
         char nombre[20];
         int id;
@@ -27,19 +27,19 @@ class tabla
         ListCampos * campos;
         ListRegistros * registros;
         char * toChar();
-        void charToTabla(char * data);
+        void charToTabla(char * data,int t);
         tabla * sig;
         void toString();
-        void cargarCampos();
-        void cargarRegistros();
+        void cargarCampos(int t);
+        void cargarRegistros(ManejadordeBloques * mbloques);
         void crearCampo(ManejadordeBloques * mbloques, char name[20],int tipo);
         void crearRegistro(ManejadordeBloques * mbloques,Registro *r);
         Registro * interpretarRegistro(char * data,int longitud);
         int getLongitudRegistros();
         void printTabla();
         Indice * indice;
-        int getTamanoHashTable();
-        Registro * buscarRegistro(char *id);
+        int getTamanoHashTable(int t);
+        Registro * buscarRegistro(char *id,ManejadordeBloques * mb);
         void manejadorBIndice(ManejadordeBloques * mB);
 
 

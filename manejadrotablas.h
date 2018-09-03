@@ -11,7 +11,7 @@
 class ManejadroTablas
 {
     public:
-        ManejadroTablas(DataFile *a,MasterBlock *masterBlock);
+        ManejadroTablas(DataFile *a,MasterBlock *masterBlock,ManejadordeBloques * mb);
         void listarTablas();
         tabla * buscarTabla(int id);
         BloqueTabla * buscarBloqueTabla(int n);

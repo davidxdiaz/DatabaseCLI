@@ -22,9 +22,9 @@ using namespace std;
 int main()
 {
     //Creo la base de Datos
-    Database * db = new Database("BaseDatos",8192);
+    Database * db = new Database("BaseDatos",8192,2000);
     //Pruebo el crear la base de datos
-    //db->createDataBase(1,"MB");
+    //->createDataBase(10,"MB");
     db->mBloques->masterBlock->print();
 
 
@@ -35,7 +35,7 @@ int main()
     ManejadroTablas * mtablas=new ManejadroTablas(archivo,mbloques->masterBlock);*/
 
 
-   /*for(int c=0;c<1;c++)
+    for(int c=0;c<1;c++)
     {
         char * nombre= new char[20];
         nombre[0]='t';
@@ -61,11 +61,11 @@ int main()
         char * i = const_cast<char *>(id.c_str());
         char * e = const_cast<char *>(edad.c_str());
         db->mTablas->crearCampo(c,i,0,db->mBloques);
-        db->mTablas->crearCampo(c,nom,0,db->mBloques);
-        db->mTablas->crearCampo(c,e,1,db->mBloques);
+        db->mTablas->crearCampo(c,nom,2,db->mBloques);
+        db->mTablas->crearCampo(c,e,0,db->mBloques);
 
-    }
-    for(int c=0;c<1000;c++)
+    }//*/
+    for(int c=1;c<2;c++)
     {
         int x=0;
 
@@ -86,23 +86,26 @@ int main()
         CampoDatos * d1=new CampoDatos(i,db->mTablas->buscarTabla(x)->campos->get(0));
         CampoDatos * d2=new CampoDatos(nom,db->mTablas->buscarTabla(x)->campos->get(1));
         CampoDatos * d3=new CampoDatos(e,db->mTablas->buscarTabla(x)->campos->get(2));
+        cout<<"Agrego CampoDatos"<<endl;
         r->campoDatos->add(d1);
         r->campoDatos->add(d2);
         r->campoDatos->add(d3);
+        cout<<"Antes de agregar registro"<<endl;
         db->mTablas->addRegistro(x,db->mBloques,r);
+        cout<<"Agrego el registro"<<endl;
     }//*/
 
     //Probando listar Tablas
-    //db->mTablas->listarTablas();
-
+    db->mTablas->listarTablas();
+    db->mBloques->masterBlock->print();
 
     //Probando la hashTable//
-    // db->mTablas->buscarTabla(0)->toString();
+    //db->mTablas->buscarTabla(0)->toString();
 
    /* BloqueIndice * b = new BloqueIndice(db->archivo,3);
     b->cargar();
     b->listarElementos();//*/
-    //db->mTablas->buscarTabla(0)->buscarRegistro("id_700")->printRegistro();
+    db->mTablas->buscarTabla(0)->buscarRegistro("id_0",db->mBloques)->printRegistro();
 
 
     //Probando Json

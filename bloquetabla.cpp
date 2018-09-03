@@ -21,10 +21,10 @@ BloqueTabla::BloqueTabla(DataFile * a,int nB,int t)
     sig=0;
 }
 
-BloqueTabla::BloqueTabla(int n)
+BloqueTabla::BloqueTabla(int n,int t)
 {
     nBloque=n;
-    tamano=512;
+    tamano=t;
     tablas=new ListTabla();
 }
 
@@ -49,8 +49,8 @@ char * BloqueTabla::toChar()
     {
 
         char * entry_data= tablas->get(c)->toChar();
-        memcpy(&data[pos],entry_data,56);
-        pos+=56;
+        memcpy(&data[pos],entry_data,64);
+        pos+=64;
     }
     return data;
 }
@@ -68,23 +68,23 @@ void BloqueTabla::initFromChar(char * data)
     pos+=4;
     for(int c=0;c<cantidad;c++)
     {
-        tabla *t= new tabla("",0,0,0,0,0,0,archivo,0,0,0);
-        t->charToTabla(&data[pos]);
+        tabla *t= new tabla("",0,0,0,0,0,0,archivo,0,0,0,tamano);
+        t->charToTabla(&data[pos],tamano);
         tablas->addTabla(t);
-        pos+=56;
+        pos+=64;
     }
 }
 
 void BloqueTabla::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamano+24;
+    int pos= nBloque * tamano+28;
     archivo->escribir(data,pos,tamano);
 }
 
 void BloqueTabla::cargar()
 {
-    int pos= nBloque * tamano+20;
+    int pos= nBloque * tamano+28;
     char * data= archivo->leer(pos,tamano);
     initFromChar(data);
 }

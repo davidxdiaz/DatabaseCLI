@@ -12,23 +12,23 @@ BloqueRegistro::BloqueRegistro(DataFile * archivo,int nBloque,char * r,int t)
     registros= new ListRegistros();
     registro= r;
 }
-void BloqueRegistro::escribir(char * registro,int longitud)
+void BloqueRegistro::escribir()
 {
-    char * data= this->toChar(registro,longitud);
-    int pos= nBloque * tamBloque+24;
+    char * data= this->toChar();
+    int pos= nBloque * tamBloque+28;
     archivo->escribir(data,pos,tamBloque);
 }
-void BloqueRegistro::cargar(int longitud)
+void BloqueRegistro::cargar()
 {
-    int pos= nBloque * tamBloque+20;
+    int pos= nBloque * tamBloque+28;
     char * data=archivo->leer(pos,tamBloque);
-    charToBloque(data,longitud);
+    charToBloque(data);
 }
 void BloqueRegistro::actualizarCantidad()
 {
     //this->cantidad++;
 }
-char *BloqueRegistro::toChar(char * registro,int longitud)
+char *BloqueRegistro::toChar()
 {
     char * data= new char[tamBloque];
     int pos=0;
@@ -38,11 +38,13 @@ char *BloqueRegistro::toChar(char * registro,int longitud)
     pos+=4;
     memcpy(&data[pos],&siguiente,4);
     pos+=4;
-    memcpy(&data[pos],registro,longitud);
-    pos+=longitud;
+    memcpy(&data[pos],&longitudRegistro,4);
+    pos+=4;
+    memcpy(&data[pos],registro,longitudRegistro);
+    pos+=longitudRegistro;
     return data;
 }
-void BloqueRegistro::charToBloque(char *data, int longitud)
+void BloqueRegistro::charToBloque(char *data)
 {
     int pos=0;
     memcpy(&nBloque,&data[pos],4);
@@ -51,12 +53,16 @@ void BloqueRegistro::charToBloque(char *data, int longitud)
     pos+=4;
     memcpy(&siguiente,&data[pos],4);
     pos+=4;
-    memcpy(registro,&data[pos],longitud);
-    pos+=longitud;
+    memcpy(&longitudRegistro,&data[pos],4);
+    pos+=4;
+    char *r = new char[longitudRegistro];
+    memcpy(r,&data[pos],longitudRegistro);
+    //registro=r;
+    pos+=longitudRegistro;
 }
 
 Registro * BloqueRegistro::getRegsitro(int pos,int longitud) {
-    this->cargar(longitud);
+    this->cargar();
     Registro * r= registros->get(pos);
     return r;
 }

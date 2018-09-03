@@ -7,8 +7,8 @@
 class ManejadordeBloques
 {
     public:
-        ManejadordeBloques(DataFile *a,int t);
-        void formatearDataFile(int t);
+        ManejadordeBloques(DataFile *a,int t,int tChar);
+        void formatearDataFile(int t,int tchar);
         DataFile * archivo;
         Bloque * asignarNueboBloque();
         void actualizarMasterBlock();

@@ -2,13 +2,13 @@
 #define BLOQUETABLA_H
 #include "listtabla.h"
 #include "datafile.h"
-//#include <tabla.h>
-#include <vector>
+
+
 class BloqueTabla
 {
     public:
         BloqueTabla(DataFile * archivo,int nB,int t);
-        BloqueTabla(int nB);
+        BloqueTabla(int nB,int t);
         int nBloque;
         int siguiente;
         int tamano;

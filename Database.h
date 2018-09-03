@@ -12,10 +12,11 @@
 using namespace std;
 class Database {
     public:
-        Database(string name,int tamBloque);
+        Database(string name,int tamBloque,int tamChar);
         DataFile * archivo;
         char* dataName;
         char * path;
+        int tamanoChar;
         ManejadordeBloques * mBloques;
         ManejadroTablas * mTablas;
         bool dropDatabase();

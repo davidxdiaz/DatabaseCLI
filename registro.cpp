@@ -5,10 +5,9 @@
 #include "campodatos.h"
 #include <iostream>
 using namespace std;
-Registro::Registro(int longitud,int id)
+Registro::Registro(int longitud)
 {
     campoDatos= new ListCampoDatos();
-    idRegistro=id;
     sig=0;
     longitudRegistro=longitud;
 }
@@ -18,13 +17,13 @@ char * Registro::toChar()
     int pos=0;
     char * data= new char[longitudRegistro]; //Escribire un id registro interno para asi manejar la hashtable
     //cout<<longitudRegistro<<endl;
-    memcpy(&data[pos],&idRegistro,4);
-    pos+=4;
+    memcpy(&data[pos],&idRegistro,20);
+    pos+=20;
     for(int c=0;c<campoDatos->cantidad;c++)
     {
         CampoDatos * campoDato= campoDatos->get(c);
         int l=campoDato->defCampos->longitud;
-        char * data_entry=campoDato->toChar();
+        char * data_entry = campoDato->toChar();
         memcpy(&data[pos],data_entry,l);
         pos=pos+l;
     }

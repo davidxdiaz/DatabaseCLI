@@ -11,7 +11,7 @@
 
 class BloqueIndice {
 public:
-    BloqueIndice(DataFile * archivo,int nBloque);
+    BloqueIndice(DataFile * archivo,int nBloque,int t);
     int nBloque;
     int siguiente;
     int tamano;

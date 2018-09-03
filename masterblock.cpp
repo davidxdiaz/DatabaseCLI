@@ -5,21 +5,22 @@
 #include "datafile.h"
 
 using namespace std;
-MasterBlock::MasterBlock(DataFile *a,int sigBD,int primerBT,int actualBT,int tamBloque)
+MasterBlock::MasterBlock(DataFile *a,int sigBD,int primerBT,int actualBT,int tamBloque,int tchar)
 {
     sigBloqueDisponible=sigBD;
     tamanoBloque=tamBloque;
     primerBloqueTabla=primerBT;
     actualBloqueTabla=actualBT;
-    sizeMasterB=24;
+    sizeMasterB=28;
     archivo=a;
     ultimoBloque=1;
+    tamChar=tchar;
 }
 
 MasterBlock::MasterBlock(DataFile *a)
 {
     archivo=a;
-    sizeMasterB=24;
+    sizeMasterB=28;
 }
 
 char * MasterBlock::toChar()
@@ -38,6 +39,8 @@ char * MasterBlock::toChar()
     pos+=4;
     memcpy(&data[pos],&ultimoBloque,4);
     pos+=4;
+    memcpy(&data[pos],&tamChar,4);
+    pos+=4;
     return data;
 }
 
@@ -55,6 +58,8 @@ void MasterBlock::charToBloque(char * data)
     memcpy(&sizeMasterB,&data[pos],4);
     pos+=4;
     memcpy(&ultimoBloque,&data[pos],4);
+    pos+=4;
+    memcpy(&tamChar,&data[pos],4);
     pos+=4;
 }
 

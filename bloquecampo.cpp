@@ -20,13 +20,13 @@ BloqueCampo::BloqueCampo(DataFile * file,int numBloque,int t)
 void BloqueCampo::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamBloque+24;
+    int pos= nBloque * tamBloque+28;
     archivo->escribir(data,pos,tamBloque);
 }
 
 void BloqueCampo::cargar()
 {
-    int pos= nBloque * tamBloque+20;
+    int pos= nBloque * tamBloque+28;
     char * data=archivo->leer(pos,tamBloque);
     charToBloque(data);
 }

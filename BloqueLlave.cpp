@@ -70,13 +70,13 @@ void BloqueLlave::initFromChar(char * data)
 void BloqueLlave::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamano+24;
+    int pos= nBloque * tamano+28;
     archivo->escribir(data,pos,tamano);
 }
 
 void BloqueLlave::cargar()
 {
-    int pos= nBloque * tamano+20;
+    int pos= nBloque * tamano+28;
     char * data= archivo->leer(pos,tamano);
     initFromChar(data);
 }

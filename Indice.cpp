@@ -24,7 +24,7 @@ bool Indice::insertar(Idx_Entry * e,ManejadordeBloques * mb)
 {
     int pos= hash(e->id);
 
-    if(buscar(e->id)==0){
+    if(buscar(e->id,mb)==0){
 
         Idx_Entry * entrada=e; //new Idx_Entry(id,nBloque,nRegistroR);
         int cont=0;
@@ -37,7 +37,7 @@ bool Indice::insertar(Idx_Entry * e,ManejadordeBloques * mb)
         int bloqueActual = primerBIndice;
         for(int c=0;c<cont;c++)
         {
-            BloqueIndice * bIndice= new BloqueIndice(archivo,bloqueActual);
+            BloqueIndice * bIndice= new BloqueIndice(archivo,bloqueActual,mb->masterBlock->tamanoBloque);
             bIndice->cargar();
             bloqueActual=bIndice->siguiente;
             delete bIndice;
@@ -45,14 +45,14 @@ bool Indice::insertar(Idx_Entry * e,ManejadordeBloques * mb)
         if(cont>0)
             cont--;
         int posDef= pos - (cont * 62);
-        BloqueIndice * bloque= new BloqueIndice(archivo,bloqueActual);
+        BloqueIndice * bloque= new BloqueIndice(archivo,bloqueActual,mb->masterBlock->tamanoBloque);
         bloque->cargar();
         HashTableEntry * entry= bloque->getEntrada(posDef);
         if(entry->primerBloqueLLave==-1)
         {
 
             int n = mb->asignarNueboBloque()->nBloque;
-            BloqueLlave * bLlave= new BloqueLlave(archivo,n);
+            BloqueLlave * bLlave= new BloqueLlave(archivo,n,mb->masterBlock->tamanoBloque);
 
             bLlave->llaves[0]=entrada;
             bLlave->actualizarCantidad();
@@ -65,7 +65,7 @@ bool Indice::insertar(Idx_Entry * e,ManejadordeBloques * mb)
 
         }
         int bloqueLlaves= entry->actualBloqueLLave;
-        BloqueLlave * b = new BloqueLlave(archivo,bloqueLlaves);
+        BloqueLlave * b = new BloqueLlave(archivo,bloqueLlaves,mb->masterBlock->tamanoBloque);
         b->cargar();
         int posicion=b->cantidad;
         if(posicion<17)
@@ -78,8 +78,8 @@ bool Indice::insertar(Idx_Entry * e,ManejadordeBloques * mb)
         else
         {
             Bloque * block = mb->asignarNueboBloque();
-            BloqueLlave *bLlave = new BloqueLlave(archivo,block->nBloque);
-            BloqueLlave * tmp= new BloqueLlave(archivo,entry->actualBloqueLLave);
+            BloqueLlave *bLlave = new BloqueLlave(archivo,block->nBloque,mb->masterBlock->tamanoBloque);
+            BloqueLlave * tmp= new BloqueLlave(archivo,entry->actualBloqueLLave,mb->masterBlock->tamanoBloque);
             tmp->cargar();
             tmp->siguiente=bLlave->nBloque;
             tmp->escribir();
@@ -107,7 +107,7 @@ int Indice::hash(char * id)
     return n;
 }
 
-Idx_Entry * Indice::buscar(char * id)
+Idx_Entry * Indice::buscar(char * id,ManejadordeBloques * mb)
 {
     int pos = hash(id);
     cout<<"Pos "<<pos<<endl;
@@ -122,7 +122,7 @@ Idx_Entry * Indice::buscar(char * id)
     int bloqueActual = primerBIndice;
     for(int c=0;c<cont;c++)
     {
-        BloqueIndice * bIndice= new BloqueIndice(archivo,bloqueActual);
+        BloqueIndice * bIndice= new BloqueIndice(archivo,bloqueActual,mb->masterBlock->tamanoBloque);
         bIndice->cargar();
         bloqueActual=bIndice->siguiente;
         delete bIndice;
@@ -130,14 +130,14 @@ Idx_Entry * Indice::buscar(char * id)
     if(cont>0)
         cont--;
     int posDef= pos - (cont * 62);
-    BloqueIndice * bloque= new BloqueIndice(archivo,bloqueActual);
+    BloqueIndice * bloque= new BloqueIndice(archivo,bloqueActual,mb->masterBlock->tamanoBloque);
     bloque->cargar();
 
     HashTableEntry * entry= bloque->getEntrada(posDef);
     int bloqueLlaves = entry->primerBloqueLLave;
 
     while (bloqueLlaves !=-1){
-        BloqueLlave * b= new BloqueLlave(archivo,bloqueLlaves);
+        BloqueLlave * b= new BloqueLlave(archivo,bloqueLlaves,mb->masterBlock->tamanoBloque);
 
         b->cargar();
 

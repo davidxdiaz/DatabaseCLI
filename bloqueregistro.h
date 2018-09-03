@@ -13,11 +13,11 @@ class BloqueRegistro
         int siguiente;
         int longitudRegistro;
         char * registro;
-        void escribir(char * registro,int longitud);
-        void cargar(int longitud);
+        void escribir();
+        void cargar();
         void actualizarCantidad();
-        char * toChar(char * registro,int longitud);
-        void charToBloque(char * data,int longitud);
+        char * toChar();
+        void charToBloque(char * data);
         ListRegistros * registros;
 
         Registro * getRegsitro(int pos,int longitud);

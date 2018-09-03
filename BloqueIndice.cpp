@@ -6,11 +6,11 @@
 #include <iostream>
 using namespace std;
 
-BloqueIndice::BloqueIndice(DataFile * a,int nB)
+BloqueIndice::BloqueIndice(DataFile * a,int nB,int t)
 {
     nBloque=nB;
     siguiente=-1;
-    tamano=512;
+    tamano=t;
     cantidad=0;
     for(int c=0;c<62;c++)
         indice[c]=new HashTableEntry(-1,-1);
@@ -81,13 +81,13 @@ void BloqueIndice::listarElementos() {
 void BloqueIndice::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamano+24;
+    int pos= nBloque * tamano+28;
     archivo->escribir(data,pos,tamano);
 }
 
 void BloqueIndice::cargar()
 {
-    int pos= nBloque * tamano+20;
+    int pos= nBloque * tamano+28;
     char * data= archivo->leer(pos,tamano);
     initFromChar(data);
 }

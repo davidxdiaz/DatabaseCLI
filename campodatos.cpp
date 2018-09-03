@@ -4,9 +4,10 @@
 #include <stdio.h>
 #include <string.h>
 using namespace std;
-CampoDatos::CampoDatos(char val[20],campo *dCampos)
+CampoDatos::CampoDatos(char * val,campo *dCampos)
 {
-    strncpy(valor,val,20);
+    valor= new char[dCampos->longitud];
+    memcpy(&valor[0],&val,dCampos->longitud);
     defCampos=dCampos,
     sig=0;
 }
@@ -48,9 +49,9 @@ void CampoDatos::toString()
 char * CampoDatos::toChar()
 {
     int pos=0;
-    char * data= new char[20];
-    memcpy(&data[pos],valor,20);
-    pos+=20;
+    char * data= new char[defCampos->longitud];
+    memcpy(&data[pos],valor,defCampos->longitud);
+    pos+=defCampos->longitud;
     return data;
 }
 

@@ -23,13 +23,13 @@ Bloque::Bloque(int num,int tam)
 void Bloque::escribir()
 {
     char * data= this->toChar();
-    int pos= nBloque * tamBloque+24;
+    int pos= nBloque * tamBloque+28;
     archivo->escribir(data,pos,tamBloque);
 }
 
 void Bloque::cargar()
 {
-    int pos= nBloque * tamBloque+20;
+    int pos= nBloque * tamBloque+28;
     char * data=archivo->leer(pos,tamBloque);
     charToBloque(data);
 }

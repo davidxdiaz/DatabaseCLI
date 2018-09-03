@@ -6,11 +6,11 @@
 class Registro
 {
     public:
-        Registro(int longitud,int id);
+        Registro(int longitud);
         ListCampoDatos * campoDatos;
         ListCampos * listaCampos;
         int longitudRegistro;
-        int idRegistro;
+        char idRegistro[20];
         Registro * sig;
         char * toChar();
         void initFromChar(char * data);

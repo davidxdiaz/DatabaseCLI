@@ -5,7 +5,8 @@
 #include "Database.h"
 
 
-Database::Database(string name,int tBloque) {
+Database::Database(string name,int tBloque,int tamChar) {
+    tamanoChar=tamChar;
     string a="C:\\Users\\USUARIO\\Desktop\\BaseDatos\\";
     string b=".data";
     string p= a+name+b;
@@ -22,9 +23,11 @@ bool Database::dropDatabase() {
     cerrarConexion();
     if( remove( path)!=0 ){
         cout<<"Error al removerlo: "<<strerror(errno)<<endl;
+        return false;
     }else{
         cout<<"Base de Datos con el nombre "<< dataName<<" removido con exito"<<endl;
     }
+    return true;
 }
 
 void Database::cerrarConexion() {
@@ -33,8 +36,8 @@ void Database::cerrarConexion() {
 
 void Database::iniciarConexion(int t) {
     archivo->abrir();
-    mBloques= new ManejadordeBloques(archivo,t);
-    mTablas=new ManejadroTablas(archivo,mBloques->masterBlock);
+    mBloques= new ManejadordeBloques(archivo,t,tamanoChar);
+    mTablas=new ManejadroTablas(archivo,mBloques->masterBlock,mBloques);
 }
 
 void Database::createDataBase(int tamano,string tipo)

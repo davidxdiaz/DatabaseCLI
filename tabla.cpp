@@ -15,9 +15,14 @@
 #include "registro.h"
 #include "Idx_Entry.h"
 #include "BloqueIndice.h"
+#include <stdio.h>
+
+#include <string.h>
+#include <sstream>
+
 using namespace std;
 
-tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile *a,int primerBIndice,int actualBIndice,int tChar)
+tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int actualBDatos,int nB,DataFile *a,int primerBIndice,int actualBIndice,int tChar,int tamBloque)
 {
     archivo=a;
     strncpy(nombre,name,20);
@@ -33,7 +38,7 @@ tabla::tabla(char name[20],int i,int pBCampos,int actualBCampos,int pBDatos,int 
     sig=0;
     campos= new ListCampos();
     registros= new ListRegistros();
-    indice=new Indice(archivo,primerBloqueIndice,primerBloqueDatos,getTamanoHashTable());
+    indice=new Indice(archivo,primerBloqueIndice,primerBloqueDatos,getTamanoHashTable(tamBloque));
     contRegistros=0;
     eliminado=1; // 0 para indicar que ha sido eliminado
 }
@@ -70,7 +75,7 @@ char * tabla::toChar()
     return data;
 }
 
-void tabla::charToTabla(char * data)
+void tabla::charToTabla(char * data,int tamBloque)
 {
     int pos=0;
     memcpy(nombre,&data[pos],20);
@@ -97,14 +102,14 @@ void tabla::charToTabla(char * data)
     pos+=4;
     memcpy(&eliminado,&data[pos],4);
     pos+=4;
-    indice=new Indice(archivo,primerBloqueIndice,actualBloqueIndice,getTamanoHashTable());
+    indice=new Indice(archivo,primerBloqueIndice,actualBloqueIndice,getTamanoHashTable(tamBloque));
 }
 
 void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
     Idx_Entry *entry;
     char *registro= r->toChar();
     int longitudRegistro= this->getLongitudRegistros();
-    int disponible = mbloques->masterBlock->tamanoBloque - 12; // 12 es la metaData de BloqueRegistro no necesito los 4 de cantidad ya que guardare un registro en un solo bloqueDatos
+    int disponible = mbloques->masterBlock->tamanoBloque - 16; // 16 es la metaData de BloqueRegistro no necesito los 4 de cantidad ya que guardare un registro en un solo bloqueDatos
     int tmp=disponible;
     int cantBloques=1;
     for(;tmp < longitudRegistro;cantBloques++){
@@ -115,24 +120,36 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
         int restar= tmp - longitudRegistro;
         dif= disponible - restar;
     }
-    // ya casi esta
-    string i="id"+ r->idRegistro;
-    char * id=new char[4];
-    strcpy(id,i.c_str());
-    int posicion=0;
 
+    cout<<"Cant Bloques para el registro"<< cantBloques<<endl;
+    // IDX
+
+    stringstream idd;
+    string iden="id";
+    idd<<iden<<'_'<<contRegistros;
+    string i="id"+ contRegistros;
+    char * id=new char[20];
+    strcpy(id,idd.str().c_str());
+    strncpy(r->idRegistro,id,20);
+    //calculos para escribir
+    int posicion=0;
+    int longitudAEscribir =0;
+    if(cantBloques > 1){
+        longitudAEscribir = disponible;
+    }
+    else
+        longitudAEscribir=longitudRegistro;
     char *registroFinal = new char[this->getLongitudRegistros()];
+    memcpy(&registroFinal[posicion],registro,longitudAEscribir);
+
     if (primerBloqueDatos == -1) {
+
         Bloque *b = mbloques->asignarNueboBloque();
-        BloqueRegistro *br = new BloqueRegistro(archivo, b->nBloque,registroFinal[posicion]);
-        int pos= b->nBloque * mbloques->masterBlock->tamanoBloque + mbloques->masterBlock->sizeMasterB + 12;//metaData
-        int longitudAEscribir =0;
-        if(cantBloques > 1){
-            longitudAEscribir = disponible;
-        }
-        else
-            longitudAEscribir=longitudRegistro;
-        br->escribir(reinterpret_cast<char *>(registroFinal[posicion]), longitudAEscribir);
+        BloqueRegistro *br = new BloqueRegistro(archivo,b->nBloque,&registroFinal[posicion],mbloques->masterBlock->tamanoBloque);
+        int pos= b->nBloque * mbloques->masterBlock->tamanoBloque + mbloques->masterBlock->sizeMasterB + 16;//metaData
+
+        br->longitudRegistro=longitudAEscribir;
+        br->escribir();
         posicion+=longitudAEscribir;
         primerBloqueDatos = b->nBloque;
         actualBloqueDatos = b->nBloque;
@@ -142,62 +159,65 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
         indice->insertar(entry, mbloques);
 
         for(int c=1;c < cantBloques;c++){
-            Bloque *b = mbloques->asignarNueboBloque();
-            BloqueRegistro *br = new BloqueRegistro(archivo, b->nBloque);
-            BloqueRegistro * temporal = new BloqueRegistro(archivo,actualBloqueDatos);
-            temporal->siguiente=br->nBloque;
+            Bloque *b1 = mbloques->asignarNueboBloque();
+            BloqueRegistro *br1 = new BloqueRegistro(archivo,b1->nBloque,&registroFinal[posicion],mbloques->masterBlock->tamanoBloque);
+            BloqueRegistro * temporal = new BloqueRegistro(archivo,actualBloqueDatos,"",mbloques->masterBlock->tamanoBloque);
+            temporal->cargar();
+            temporal->siguiente=br1->nBloque;
             temporal->escribir();
-            br->escribir(reinterpret_cast<char *>(registroFinal[posicion]), longitudAEscribir);
+            br1->longitudRegistro=longitudAEscribir;
+            br1->escribir();
             posicion+=longitudAEscribir;
-            if(c+1 == cantBloques)
+            if(c+2 == cantBloques)
                 longitudAEscribir=dif;
-            delete b;
-            delete br;
+            actualBloqueDatos = b1->nBloque;
+            delete b1;
+            delete br1;
+            delete temporal;
             registros->add(r);
-            actualBloqueDatos = b->nBloque;
+
         }
         return;
     }
+
+
+    //Hacer en adelante
     int actual=actualBloqueDatos;
-    while(actual!=-1)
-    {
-        BloqueRegistro *br = new BloqueRegistro(archivo,actual);
-        br->cargar(r->longitudRegistro);
-        int maximo=(int) (496/r->longitudRegistro);
 
-        if(br->registros->cantidad < maximo)
-        {
 
-            entry= new Idx_Entry(r->campoDatos->get(0)->valor,br->nBloque,br->cantidad);
-            if(indice->insertar(entry,mbloques))
-            {
-                br->registros->add(r);
-                br->actualizarCantidad();
-                br->escribir();
-                registros->add(r);
-            }
-            else
-                cout<<"No se pudo agregar el registro debido al id del registro"<<endl;
-            return;
-            //Tenqo que guardar la tabla o por lo menos el bloqueTabla como tal
-        }
-        actual=br->siguiente;
-        delete  br;
-    }
-    entry= new Idx_Entry(r->campoDatos->get(0)->valor,mbloques->masterBlock->sigBloqueDisponible,0);
+    int pos= mbloques->masterBlock->sigBloqueDisponible * mbloques->masterBlock->tamanoBloque + mbloques->masterBlock->sizeMasterB + 16;
+
+    entry= new Idx_Entry(id,mbloques->masterBlock->sigBloqueDisponible,pos);
+    //Verifico si se pudo agregar a la hashtable
     if(indice->insertar(entry,mbloques))
     {
-        Bloque *b=mbloques->asignarNueboBloque();
-        BloqueRegistro * br = new BloqueRegistro(archivo,b->nBloque);
-        BloqueRegistro * tmp = new BloqueRegistro(archivo,actualBloqueDatos);
-        tmp->cargar(r->longitudRegistro);
-        tmp->siguiente=br->nBloque;
-        tmp->escribir();
-        br->registros->add(r);
-        registros->add(r);
-        br->actualizarCantidad();
+        cout<<"Entra"<<endl;
+        Bloque *b = mbloques->asignarNueboBloque();
+        BloqueRegistro *br = new BloqueRegistro(archivo,b->nBloque,&registroFinal[posicion],mbloques->masterBlock->tamanoBloque);
+
+        br->longitudRegistro=longitudAEscribir;
         br->escribir();
-        actualBloqueDatos=b->nBloque;
+        posicion+=longitudAEscribir;
+        actualBloqueDatos = b->nBloque;
+        cout<<"Agrega"<<endl;
+        for(int c=1;c < cantBloques;c++){
+            Bloque *b1 = mbloques->asignarNueboBloque();
+            BloqueRegistro *br1 = new BloqueRegistro(archivo,b1->nBloque,reinterpret_cast<char *>(registroFinal[posicion]),mbloques->masterBlock->tamanoBloque);
+            BloqueRegistro * temporal = new BloqueRegistro(archivo,actualBloqueDatos,id,mbloques->masterBlock->tamanoBloque);
+            temporal->cargar();
+            temporal->siguiente=br1->nBloque;
+            temporal->escribir();
+            br1->longitudRegistro=longitudAEscribir;
+            br1->escribir();
+            posicion+=longitudAEscribir;
+            if(c+2 == cantBloques)
+                longitudAEscribir=dif;
+            delete b1;
+            delete br1;
+            registros->add(r);
+            actualBloqueDatos = b1->nBloque;
+        }
+        return;
     }
     else
         cout<<"No se pudo agregar el registro debido al id del registro"<<endl;
@@ -208,7 +228,7 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
 void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
 {
     // Obtengo la longitud dependiendo del tipo de datos, si es 0 es int,si es 1 es double y si es 2 es char;
-    int lon;
+    int lon=0;
     if(tipo==0)
         lon=4;
     else if(tipo==1)
@@ -217,12 +237,12 @@ void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
         lon=tamChar;
     else
         cout<<"Error el tipo de datos que desea ingresar es incorrecto ---- Recuerde que solo puede ingresar 0(int),1(double,2(char)"<<endl;
-
+    cout<<"Longitud del campo "<<lon<<endl;
     campo * c= new campo(name,tipo,lon);
     if(primerBloqueCampos==-1)
     {
         Bloque * b =mbloques->asignarNueboBloque();
-        BloqueCampo * bc= new BloqueCampo(archivo,b->nBloque);
+        BloqueCampo * bc= new BloqueCampo(archivo,b->nBloque,mbloques->masterBlock->tamanoBloque);
         bc->campos->add(c);
         bc->cantidad++;
         bc->escribir();
@@ -237,7 +257,7 @@ void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
     int actual=primerBloqueCampos;
     while(actual!=-1)
     {
-        BloqueCampo *bc = new BloqueCampo(archivo,actual);
+        BloqueCampo *bc = new BloqueCampo(archivo,actual,mbloques->masterBlock->tamanoBloque);
         bc->cargar();
         int maximo=17;
         if(bc->cantidad<maximo)
@@ -253,8 +273,8 @@ void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
 
     }
     Bloque *b=mbloques->asignarNueboBloque();
-    BloqueCampo * bc = new BloqueCampo(archivo,b->nBloque);
-    BloqueCampo * tmp = new BloqueCampo(archivo,actualBloqueCampos);
+    BloqueCampo * bc = new BloqueCampo(archivo,b->nBloque,mbloques->masterBlock->tamanoBloque);
+    BloqueCampo * tmp = new BloqueCampo(archivo,actualBloqueCampos,mbloques->masterBlock->tamanoBloque);
     tmp->cargar();
     tmp->siguiente=bc->nBloque;
     tmp->escribir();
@@ -265,12 +285,12 @@ void tabla::crearCampo(ManejadordeBloques * mbloques,char name[20],int tipo)
     //Tengo que guardar la tabla o el Bloque Tabla
 }
 
-void tabla::cargarCampos()
+void tabla::cargarCampos(int tamBloques)
 {
     int actual=primerBloqueCampos;
     while(actual!=-1)
     {
-        BloqueCampo *bc= new BloqueCampo(archivo,actual);
+        BloqueCampo *bc= new BloqueCampo(archivo,actual,tamBloques);
         bc->cargar();
         for(int c=0;c<bc->cantidad;c++)
         {
@@ -280,31 +300,43 @@ void tabla::cargarCampos()
     }
 }
 
-void tabla::cargarRegistros()
+void tabla::cargarRegistros(ManejadordeBloques * mbloques)
 {
     int actual=primerBloqueDatos;
-    while(actual!=-1)
-    {
-        BloqueRegistro *br= new BloqueRegistro(archivo,actual);
-        int longitudReg=this->getLongitudRegistros();
-        br->cargar(longitudReg);
+    int longitudRegistro = this->getLongitudRegistros();
+    int disponible = mbloques->masterBlock->tamanoBloque - 16; // 16 es la metaData de BloqueRegistro no necesito los 4 de cantidad ya que guardare un registro en un solo bloqueDatos
+    int tmp=disponible;
+    int cantBloques=1;
+    for(;tmp < longitudRegistro;cantBloques++){
+        tmp+=disponible;
+    }
 
-        for(int c=0;c< br->cantidad;c++)
-        {
-            registros->add(interpretarRegistro(br->registros->get(c)->toChar(),longitudReg));
+
+    for(int c=0;c<contRegistros;c++){
+        // debo cargar un solo registro de uno o varios bloques
+        char * r= new char[longitudRegistro];
+        int pos=0;
+        for(int x=0;x<cantBloques;x++){
+            BloqueRegistro *br= new BloqueRegistro(archivo,actual,"",mbloques->masterBlock->tamanoBloque);
+            br->cargar();
+            memcpy(&r[pos],br->registro,br->longitudRegistro);
+            pos+=br->longitudRegistro;
+            actual=br->siguiente;
+            delete br;
         }
-        actual=br->siguiente;
+        registros->add(interpretarRegistro(r,longitudRegistro));
     }
 }
 
 Registro * tabla::interpretarRegistro(char * data,int longitud)
 {
     int pos=0;
-    Registro * reg= new Registro(longitud,0);// debo de cambiar el valor del id en registro donde esta 0
+    Registro * reg= new Registro(longitud);// debo de cambiar el valor del id en registro donde esta 0
     for(int c=0;c<campos->cantidad;c++)
     {
-        CampoDatos * campDatos= new CampoDatos("",0);
         campo * defCampo= campos->get(c);
+        CampoDatos * campDatos= new CampoDatos("",defCampo);
+
         campDatos->defCampos=defCampo;
         memcpy(campDatos->valor,&data[pos],20);
         //campDatos->valor=&data[pos];
@@ -322,7 +354,7 @@ int tabla::getLongitudRegistros()
     {
         sum+=campos->get(c)->longitud;
     }
-    return sum+4;// +4 del id registro
+    return sum+20;// +20 del id registro
 
 }
 
@@ -362,12 +394,12 @@ void tabla::printTabla()
     }
 }
 
-int tabla::getTamanoHashTable() {
+int tabla::getTamanoHashTable(int t) {
     int sum=0;
     int actual=primerBloqueIndice;
     while(actual!=-1)
     {
-        BloqueIndice * bloque= new BloqueIndice(archivo,actual);
+        BloqueIndice * bloque= new BloqueIndice(archivo,actual,t);
         bloque->cargar();
         sum+=62;
         actual=bloque->siguiente;
@@ -376,12 +408,35 @@ int tabla::getTamanoHashTable() {
     return sum;
 }
 
-Registro * tabla::buscarRegistro(char *id) {
-    Idx_Entry * entry = indice->buscar(id);
-    if(entry==0)
+Registro * tabla::buscarRegistro(char *id, ManejadordeBloques * mbloques) {
+    Idx_Entry * entry = indice->buscar(id,mbloques);
+    if(entry==0){
+        cout<<"No se encontro el id"<<endl;
         return 0;
-    BloqueRegistro * bloque= new BloqueRegistro(archivo,entry->numeroBloque);
-    Registro * registro= bloque->getRegsitro(entry->numeroRR,getLongitudRegistros());
+    }
+
+    //calculos
+
+    int longitudRegistro = this->getLongitudRegistros();
+    int disponible = mbloques->masterBlock->tamanoBloque - 16; // 16 es la metaData de BloqueRegistro no necesito los 4 de cantidad ya que guardare un registro en un solo bloqueDatos
+    int tmp=disponible;
+    int cantBloques=1;
+    for(;tmp < longitudRegistro;cantBloques++){
+        tmp+=disponible;
+    }
+    Registro * registro;
+    char * r = new char[longitudRegistro];
+    int pos=0;
+    for(int c=0;c<cantBloques;c++){
+        BloqueRegistro * bloque= new BloqueRegistro(archivo,entry->numeroBloque,"",mbloques->masterBlock->tamanoBloque);
+        bloque->cargar();
+        memcpy(&r[pos],bloque->registro,bloque->longitudRegistro);
+        pos+=bloque->longitudRegistro;
+        delete bloque;
+    }
+    registro= new Registro(longitudRegistro);
+    registro=interpretarRegistro(r,longitudRegistro);
+
     for(int c=0;c<campos->cantidad;c++)
     {
         campo * defCampo = campos->get(c);
@@ -393,11 +448,11 @@ Registro * tabla::buscarRegistro(char *id) {
 void tabla::manejadorBIndice(ManejadordeBloques * mB)
 {
     int n= mB->asignarNueboBloque()->nBloque;
-    BloqueIndice * bi = new BloqueIndice(archivo,n);
+    BloqueIndice * bi = new BloqueIndice(archivo,n,mB->masterBlock->tamanoBloque);
     bi->escribir();
     if(primerBloqueIndice==-1)
         primerBloqueIndice=n;
     this->actualBloqueIndice=n;
-    indice->actualizarIndice(primerBloqueIndice,actualBloqueIndice,getTamanoHashTable());
+    indice->actualizarIndice(primerBloqueIndice,actualBloqueIndice,getTamanoHashTable(mB->masterBlock->tamanoBloque));
 }
 

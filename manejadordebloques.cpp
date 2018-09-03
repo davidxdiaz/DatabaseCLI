@@ -4,24 +4,24 @@
 #include <iostream>
 using namespace std;
 
-ManejadordeBloques::ManejadordeBloques(DataFile *a,int tamanoBloque)
+ManejadordeBloques::ManejadordeBloques(DataFile *a,int tamanoBloque,int tchar)
 {
     archivo=a;
     if(archivo->isVacio()==true)
     {
-        formatearDataFile(tamanoBloque);
+        formatearDataFile(tamanoBloque,tchar);
         asignarNueboBloque();
         actualizarMasterBlock();
     }else
     {
-        masterBlock= new MasterBlock(archivo,0,-1,-1,tamanoBloque);
+        masterBlock= new MasterBlock(archivo,0,-1,-1,tamanoBloque,tchar);
         masterBlock->cargar();
     }
 }
 
-void ManejadordeBloques::formatearDataFile(int t)
+void ManejadordeBloques::formatearDataFile(int t,int tchar)
 {
-    masterBlock= new MasterBlock(archivo,0,-1,-1,t);
+    masterBlock= new MasterBlock(archivo,0,-1,-1,t,tchar);
     masterBlock->guardar();
 }
 
