@@ -55,9 +55,8 @@ void BloqueRegistro::charToBloque(char *data)
     pos+=4;
     memcpy(&longitudRegistro,&data[pos],4);
     pos+=4;
-    char *r = new char[longitudRegistro];
-    memcpy(r,&data[pos],longitudRegistro);
-    //registro=r;
+    registro = new char[longitudRegistro];
+    memcpy(registro,&data[pos],longitudRegistro);
     pos+=longitudRegistro;
 }
 

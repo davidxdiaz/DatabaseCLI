@@ -55,11 +55,11 @@ char * CampoDatos::toChar()
     return data;
 }
 
-void CampoDatos::initFromChar(char * data)
+void CampoDatos::initFromChar(char * data,int l)
 {
     int pos=0;
-    memcpy(valor,&data[pos],20);
-    pos+=20;
+    memcpy(valor,&data[pos],l);
+    pos+=l;
 }
 
 

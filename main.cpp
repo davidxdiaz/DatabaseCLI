@@ -23,9 +23,10 @@ int main()
 {
     //Creo la base de Datos
     Database * db = new Database("BaseDatos",8192,2000);
+    //db->dropDatabase();
     //Pruebo el crear la base de datos
-    //->createDataBase(10,"MB");
-    db->mBloques->masterBlock->print();
+    //db->createDataBase(5,"MB");
+    //db->mBloques->masterBlock->print();
 
 
     //Proyecto anterior
@@ -35,7 +36,7 @@ int main()
     ManejadroTablas * mtablas=new ManejadroTablas(archivo,mbloques->masterBlock);*/
 
 
-    for(int c=0;c<1;c++)
+   /*for(int c=0;c<10;c++)
     {
         char * nombre= new char[20];
         nombre[0]='t';
@@ -65,7 +66,7 @@ int main()
         db->mTablas->crearCampo(c,e,0,db->mBloques);
 
     }//*/
-    for(int c=1;c<2;c++)
+    /*for(int c=0;c<10;c++)
     {
         int x=0;
 
@@ -94,10 +95,10 @@ int main()
         db->mTablas->addRegistro(x,db->mBloques,r);
         cout<<"Agrego el registro"<<endl;
     }//*/
-
+    //db->mTablas->buscarTabla(0)->printTabla();
     //Probando listar Tablas
-    db->mTablas->listarTablas();
-    db->mBloques->masterBlock->print();
+    //db->mTablas->listarTablas();
+    //db->mBloques->masterBlock->print();
 
     //Probando la hashTable//
     //db->mTablas->buscarTabla(0)->toString();
@@ -105,7 +106,7 @@ int main()
    /* BloqueIndice * b = new BloqueIndice(db->archivo,3);
     b->cargar();
     b->listarElementos();//*/
-    db->mTablas->buscarTabla(0)->buscarRegistro("id_0",db->mBloques)->printRegistro();
+    //db->mTablas->buscarTabla(0)->buscarRegistro("id_0",db->mBloques)->printRegistro();
 
 
     //Probando Json

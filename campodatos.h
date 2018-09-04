@@ -15,7 +15,7 @@ class CampoDatos
         void printValor();
         void toString();
         char * toChar();
-        void initFromChar(char * data);
+        void initFromChar(char * data,int t);
 
     private:
 };

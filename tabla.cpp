@@ -107,7 +107,7 @@ void tabla::charToTabla(char * data,int tamBloque)
 
 void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
     Idx_Entry *entry;
-    char *registro= r->toChar();
+
     int longitudRegistro= this->getLongitudRegistros();
     int disponible = mbloques->masterBlock->tamanoBloque - 16; // 16 es la metaData de BloqueRegistro no necesito los 4 de cantidad ya que guardare un registro en un solo bloqueDatos
     int tmp=disponible;
@@ -131,6 +131,8 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
     char * id=new char[20];
     strcpy(id,idd.str().c_str());
     strncpy(r->idRegistro,id,20);
+
+    char *registro= r->toChar();
     //calculos para escribir
     int posicion=0;
     int longitudAEscribir =0;
@@ -157,6 +159,8 @@ void tabla::crearRegistro(ManejadordeBloques * mbloques,Registro *r) {
         entry = new Idx_Entry(id, b->nBloque, pos);
         manejadorBIndice(mbloques);
         indice->insertar(entry, mbloques);
+
+        registros->add(r);
 
         for(int c=1;c < cantBloques;c++){
             Bloque *b1 = mbloques->asignarNueboBloque();
@@ -338,7 +342,7 @@ Registro * tabla::interpretarRegistro(char * data,int longitud)
         CampoDatos * campDatos= new CampoDatos("",defCampo);
 
         campDatos->defCampos=defCampo;
-        memcpy(campDatos->valor,&data[pos],20);
+        memcpy(campDatos->valor,&data[pos],defCampo->longitud);
         //campDatos->valor=&data[pos];
         //memcpy(campDatos->valor,&data[pos],defCampo->longitud);
         pos+=defCampo->longitud;
@@ -431,6 +435,7 @@ Registro * tabla::buscarRegistro(char *id, ManejadordeBloques * mbloques) {
         BloqueRegistro * bloque= new BloqueRegistro(archivo,entry->numeroBloque,"",mbloques->masterBlock->tamanoBloque);
         bloque->cargar();
         memcpy(&r[pos],bloque->registro,bloque->longitudRegistro);
+        cout<<"long registro"<<bloque->longitudRegistro<<endl;
         pos+=bloque->longitudRegistro;
         delete bloque;
     }

@@ -13,7 +13,7 @@ class Registro
         char idRegistro[20];
         Registro * sig;
         char * toChar();
-        void initFromChar(char * data);
+        void initFromChar(char * data,ListCampos * campos);
         void printRegistro();
 
     private:

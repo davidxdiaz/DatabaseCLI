@@ -4,6 +4,7 @@
 #include <string.h>
 #include "campodatos.h"
 #include <iostream>
+#include "listcampos.h"
 using namespace std;
 Registro::Registro(int longitud)
 {
@@ -30,15 +31,16 @@ char * Registro::toChar()
     return data;
 }
 
-void Registro::initFromChar(char * data)
+void Registro::initFromChar(char * data,ListCampos * campos)
 {
     int pos=0;
-    for(int c=0;c<longitudRegistro;c+=20)
+    for(int c=0;c<longitudRegistro;c++)
     {
+        campo * ca = campos->get(c);
         CampoDatos * cam= new CampoDatos("",0);
-        cam->initFromChar(&data[pos]);
+        cam->initFromChar(&data[pos],ca->longitud);
         campoDatos->add(cam);
-        pos+=20;
+        pos+=ca->longitud;
     }
 }
 
